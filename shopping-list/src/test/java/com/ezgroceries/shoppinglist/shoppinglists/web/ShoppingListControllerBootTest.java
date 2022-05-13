@@ -11,6 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.UUID;
+
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -29,16 +31,16 @@ public class ShoppingListControllerBootTest {
 
     @Test
     public void getShoppingList() throws Exception {
-        given(shoppingListService.getShoppingList(anyString()))
+        given(shoppingListService.getShoppingList(any(UUID.class)))
                 .willReturn(new ShoppingList("Test"));
 
-        mockMvc.perform(get("/shopping-lists/does_not_matter"))
+        mockMvc.perform(get("/shopping-lists/" + UUID.randomUUID()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("name").value("Test"));
 
-        verify(shoppingListService).getShoppingList(anyString());
+        verify(shoppingListService).getShoppingList(any(UUID.class));
     }
 
     @Test

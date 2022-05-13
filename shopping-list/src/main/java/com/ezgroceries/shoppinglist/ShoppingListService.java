@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ShoppingListService {
@@ -16,9 +17,9 @@ public class ShoppingListService {
         return shoppingList;
     }
 
-    public ShoppingList getShoppingList(String name ) {
+    public ShoppingList getShoppingList(UUID shoppingListId ) {
         return shoppingLists.stream()
-                .filter(shoppingList -> name.equals(shoppingList.getName()))
+                .filter(shoppingList -> shoppingListId.equals(shoppingList.getShoppingListId()))
                 .findFirst()
                 .orElse(null);
     }

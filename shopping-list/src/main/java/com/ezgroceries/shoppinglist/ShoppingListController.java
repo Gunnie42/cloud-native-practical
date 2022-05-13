@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +22,7 @@ public class ShoppingListController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
                 .path("/{childId}")
-                .buildAndExpand(shoppingList.getName())
+                .buildAndExpand(shoppingList.getShoppingListId())
                 .toUri();
 
         return ResponseEntity
@@ -29,9 +30,9 @@ public class ShoppingListController {
                 .body(shoppingList);
     }
 
-    @GetMapping("shopping-lists/{name}")
-    public ShoppingList getShoppingList(@PathVariable String name){
-        return shoppingListService.getShoppingList(name);
+    @GetMapping("shopping-lists/{shoppingListId}")
+    public ShoppingList getShoppingList(@PathVariable UUID shoppingListId){
+        return shoppingListService.getShoppingList(shoppingListId);
     }
 
 }

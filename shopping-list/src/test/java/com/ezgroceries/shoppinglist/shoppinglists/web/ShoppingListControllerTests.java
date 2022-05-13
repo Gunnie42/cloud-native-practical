@@ -28,6 +28,8 @@ public class ShoppingListControllerTests {
 
         ShoppingList retrievedShoppingList = restTemplate.getForObject(newShoppingListLocation, ShoppingList.class);
 
+        assertThat(retrievedShoppingList).isNotNull();
+
         assertThat(retrievedShoppingList.getName()).isEqualTo(BIRTHDAY);
 
     }
