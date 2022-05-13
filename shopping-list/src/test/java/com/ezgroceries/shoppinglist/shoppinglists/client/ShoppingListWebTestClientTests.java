@@ -51,6 +51,12 @@ public class ShoppingListWebTestClientTests {
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
+                })
+                .expectBody(ShoppingList.class)
+                .consumeWith(response -> {
+                    ShoppingList retreivedShoppingList = response.getResponseBody();
+                    assertThat(retreivedShoppingList).isNotNull();
+                    assertThat(retreivedShoppingList.getName()).isEqualTo("Test");
                 });
 
 
