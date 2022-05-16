@@ -42,6 +42,15 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Added SpringDoc OpenApi (replacement for Swagger) -->
+        <!-- OpenApi 3 specification available now at http://localhost:8080/v3/api-docs/ -->
+        <!-- access the API documentation at http://localhost:8080/swagger-ui.html -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.8</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
