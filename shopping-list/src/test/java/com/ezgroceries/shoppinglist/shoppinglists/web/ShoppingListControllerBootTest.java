@@ -1,9 +1,11 @@
 package com.ezgroceries.shoppinglist.shoppinglists.web;
 
+import com.ezgroceries.shoppinglist.CocktailId;
 import com.ezgroceries.shoppinglist.ShoppingList;
 import com.ezgroceries.shoppinglist.ShoppingListController;
 import com.ezgroceries.shoppinglist.ShoppingListService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,8 +13,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -54,6 +60,30 @@ public class ShoppingListControllerBootTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(testShoppingList)))
                 .andExpect(status().isCreated());
+
+        verify(shoppingListService).addShoppingList((any(ShoppingList.class)));
+
+    }
+
+    @Test
+    void addCocktails() throws Exception {
+        ShoppingList testShoppingList = new ShoppingList("Test");
+
+        given(shoppingListService.getShoppingList(any(UUID.class)))
+                .willReturn(testShoppingList);
+
+        assertThat(testShoppingList.getShoppingListId()).isNotNull();
+
+        List<CocktailId> cocktailIds = Arrays.asList(new CocktailId(UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4")),
+                new CocktailId(UUID.fromString("d615ec78-fe93-467b-8d26-5d26d8eab073")));
+
+        mockMvc.perform(post("/shopping-lists/{shoppingListId}/cocktails", testShoppingList.getShoppingListId().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(cocktailIds)))
+                .andExpect(status().isCreated())
+                .andExpect(content().string(asJsonString(cocktailIds)));
+
+        verify(shoppingListService).getShoppingList(any(UUID.class));
 
     }
 

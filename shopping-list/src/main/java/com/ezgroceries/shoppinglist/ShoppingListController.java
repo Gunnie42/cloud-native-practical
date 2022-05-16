@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -35,4 +36,21 @@ public class ShoppingListController {
         return shoppingListService.getShoppingList(shoppingListId);
     }
 
+    @PostMapping(value = "/shopping-lists/{shoppingListId}/cocktails")
+    public ResponseEntity<List<CocktailId>> addCocktails(@PathVariable UUID shoppingListId, @RequestBody List<CocktailId> cocktailIds) {
+
+        ShoppingList shoppingList = shoppingListService.getShoppingList(shoppingListId);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequestUri()
+                .path("")
+                .buildAndExpand()
+                .toUri();
+
+        shoppingList.addCocktails(cocktailIds);
+
+        return ResponseEntity
+                .created(location)
+                .body(cocktailIds);
+    }
 }
