@@ -1,6 +1,7 @@
 package com.ezgroceries.shoppinglist;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -36,6 +37,12 @@ public class ShoppingListController {
         return shoppingListService.getShoppingList(shoppingListId);
     }
 
+    @GetMapping("shopping-lists")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ShoppingList> getShoppingLists(){
+        return shoppingListService.getShoppingLists();
+    }
+
     @PostMapping(value = "/shopping-lists/{shoppingListId}/cocktails")
     public ResponseEntity<List<CocktailId>> addCocktails(@PathVariable UUID shoppingListId, @RequestBody List<CocktailId> cocktailIds) {
 
@@ -52,4 +59,5 @@ public class ShoppingListController {
                 .created(location)
                 .body(cocktailIds);
     }
+
 }

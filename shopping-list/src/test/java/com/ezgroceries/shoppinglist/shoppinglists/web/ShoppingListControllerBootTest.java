@@ -87,6 +87,25 @@ public class ShoppingListControllerBootTest {
 
     }
 
+    @Test
+    void getAllShoppingLists() throws Exception {
+
+        List<ShoppingList> allLists = Arrays.asList(
+                new ShoppingList("Stephanie's Birthday"),
+                new ShoppingList("My Birthday")
+        );
+
+        given(shoppingListService.getShoppingLists()).willReturn(allLists);
+
+        mockMvc.perform(get("/shopping-lists"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0]['name']").value("Stephanie's Birthday"))
+                .andExpect(jsonPath("$[1]['name']").value("My Birthday"));
+
+        verify(shoppingListService).getShoppingLists();
+
+    }
+
     protected static String asJsonString(final Object obj) {
         try {
             final ObjectMapper mapper = new ObjectMapper();

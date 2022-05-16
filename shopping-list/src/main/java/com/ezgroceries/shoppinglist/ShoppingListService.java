@@ -30,11 +30,16 @@ public class ShoppingListService {
                 .orElse(null);
     }
 
+    public List<ShoppingList> getShoppingLists() {
+        return shoppingLists;
+    }
+
     public void addCocktails(ShoppingList shoppingList, List<CocktailId> cocktailIds){
         for (CocktailId cocktailId : cocktailIds){
             List<String> ingredients = cocktailService.getIngredients(cocktailId.getCocktailId());
             shoppingList.addIngredients(ingredients);
         }
     }
+
 
 }
