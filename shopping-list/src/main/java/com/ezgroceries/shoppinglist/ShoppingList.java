@@ -12,7 +12,7 @@ public class ShoppingList {
 
     private final UUID shoppingListId;
     private String name;
-    private final Set<CocktailId> cocktailIds = new HashSet<>();
+    private final Set<String> ingredients = new HashSet<>();
 
     @JsonCreator
     public ShoppingList(String name){
@@ -20,7 +20,7 @@ public class ShoppingList {
         this.name = name;
     }
 
-    public void addCocktails(List<CocktailId> cocktailIds) {
-        this.cocktailIds.addAll(cocktailIds);
+    public void addIngredients(List<String> ingredients) {
+        this.ingredients.addAll(ingredients);
     }
 }
