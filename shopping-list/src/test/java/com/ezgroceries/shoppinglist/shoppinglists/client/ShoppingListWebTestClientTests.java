@@ -1,11 +1,9 @@
 package com.ezgroceries.shoppinglist.shoppinglists.client;
 
-import com.ezgroceries.shoppinglist.ShoppingList;
-import org.junit.jupiter.api.Assertions;
+import com.ezgroceries.shoppinglist.shoppinglists.ShoppingList;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;

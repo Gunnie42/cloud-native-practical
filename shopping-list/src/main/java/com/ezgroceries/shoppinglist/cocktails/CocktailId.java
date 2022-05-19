@@ -1,10 +1,6 @@
-package com.ezgroceries.shoppinglist;
+package com.ezgroceries.shoppinglist.cocktails;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;

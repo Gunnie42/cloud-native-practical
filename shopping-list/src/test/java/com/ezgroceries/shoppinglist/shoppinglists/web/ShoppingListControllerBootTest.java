@@ -1,11 +1,10 @@
 package com.ezgroceries.shoppinglist.shoppinglists.web;
 
-import com.ezgroceries.shoppinglist.CocktailId;
-import com.ezgroceries.shoppinglist.ShoppingList;
-import com.ezgroceries.shoppinglist.ShoppingListController;
-import com.ezgroceries.shoppinglist.ShoppingListService;
+import com.ezgroceries.shoppinglist.cocktails.CocktailId;
+import com.ezgroceries.shoppinglist.shoppinglists.ShoppingList;
+import com.ezgroceries.shoppinglist.shoppinglists.ShoppingListController;
+import com.ezgroceries.shoppinglist.shoppinglists.ShoppingListService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,13 +12,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

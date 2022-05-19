@@ -1,7 +1,7 @@
-package com.ezgroceries.shoppinglist;
+package com.ezgroceries.shoppinglist.shoppinglists;
 
-import com.ezgroceries.shoppinglist.ShoppingList;
-import lombok.RequiredArgsConstructor;
+import com.ezgroceries.shoppinglist.cocktails.CocktailId;
+import com.ezgroceries.shoppinglist.cocktails.CocktailService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

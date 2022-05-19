@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist;
+package com.ezgroceries.shoppinglist.shoppinglists;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;

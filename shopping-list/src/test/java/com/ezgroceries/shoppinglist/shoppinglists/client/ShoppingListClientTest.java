@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.shoppinglists.client;
 
-import com.ezgroceries.shoppinglist.CocktailId;
-import com.ezgroceries.shoppinglist.ShoppingList;
+import com.ezgroceries.shoppinglist.cocktails.CocktailId;
+import com.ezgroceries.shoppinglist.shoppinglists.ShoppingList;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

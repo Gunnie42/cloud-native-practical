@@ -1,5 +1,6 @@
-package com.ezgroceries.shoppinglist;
+package com.ezgroceries.shoppinglist.shoppinglists;
 
+import com.ezgroceries.shoppinglist.cocktails.CocktailId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
