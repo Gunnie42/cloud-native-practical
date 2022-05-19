@@ -1,14 +1,22 @@
 package com.ezgroceries.shoppinglist;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class CocktailService {
+
+    private final CocktailDBClient cocktailDBClient;
+
+    public CocktailService(CocktailDBClient cocktailDBClient){
+        this.cocktailDBClient = cocktailDBClient;
+    }
 
     private final List<Cocktail> cocktails = Arrays.asList(
             new Cocktail(
@@ -24,8 +32,16 @@ public class CocktailService {
             "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
             Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
 
+
     public List<Cocktail> searchCocktail(String search){
-        return cocktails;
+        CocktailDBResponse cocktailDBResponse = cocktailDBClient.searchCocktails(search);
+
+        List<CocktailDBResponse.DrinkResource> drinks = cocktailDBResponse.getDrinks();
+
+        return drinks.stream()
+                .map(Cocktail::new)
+                .collect(Collectors.toList());
+
     }
 
     public Cocktail getCocktail(UUID cocktailId) {

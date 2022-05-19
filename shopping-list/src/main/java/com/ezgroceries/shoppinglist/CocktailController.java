@@ -11,17 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/cocktails", produces = "application/json")
 @RequiredArgsConstructor
 public class CocktailController {
 
-    private final CocktailService cocktailService;
+    private final CocktailDBClient cocktailDBClient;
 
     @GetMapping
     public ResponseEntity<List<Cocktail>> get(@RequestParam String search) {
-        List<Cocktail> res = cocktailService.searchCocktail(search);
+        List<Cocktail> res = cocktailDBClient
+                .searchCocktails(search)
+                .getDrinks()
+                .stream()
+                .map(Cocktail::new)
+                .collect(Collectors.toList());
+
         return ResponseEntity.ok(res);
     }
 
