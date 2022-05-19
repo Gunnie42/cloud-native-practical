@@ -1,8 +1,8 @@
 package com.ezgroceries.shoppinglist;
 
-import com.ezgroceries.shoppinglist.cocktails.CocktailId;
-import com.ezgroceries.shoppinglist.shoppinglists.ShoppingList;
-import com.ezgroceries.shoppinglist.shoppinglists.ShoppingListService;
+import com.ezgroceries.shoppinglist.controller.CocktailId;
+import com.ezgroceries.shoppinglist.controller.ShoppingListOut;
+import com.ezgroceries.shoppinglist.service.ShoppingListService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +21,7 @@ class ShoppingListPojoTest {
 
     @Test
     void shouldBeAbleToAddCocktails(){
-        ShoppingList shoppingList = new ShoppingList("Test");
+        ShoppingListOut shoppingList = new ShoppingListOut("Test");
 
         List<CocktailId> cocktailIds = Arrays.asList(
                 new CocktailId(UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4")),

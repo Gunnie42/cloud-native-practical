@@ -1,5 +1,8 @@
 package com.ezgroceries.shoppinglist.cocktails;
 
+import com.ezgroceries.shoppinglist.controller.CocktailController;
+import com.ezgroceries.shoppinglist.service.CocktailDBClient;
+import com.ezgroceries.shoppinglist.service.CocktailDBResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -19,7 +22,7 @@ import java.util.Arrays;
 import static org.springframework.web.servlet.function.RequestPredicates.param;
 
 @WebMvcTest(CocktailController.class)
-public class CocktailControllerBootTests {
+public class CocktailOutControllerBootTests {
 
     @Autowired
     private MockMvc mockMvc;

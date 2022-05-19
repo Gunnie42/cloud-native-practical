@@ -1,5 +1,6 @@
-package com.ezgroceries.shoppinglist.cocktails;
+package com.ezgroceries.shoppinglist.controller;
 
+import com.ezgroceries.shoppinglist.service.CocktailDBResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Cocktail {
+public class CocktailOut {
 
     private final UUID cocktailId;
     private final String name;
@@ -20,7 +21,7 @@ public class Cocktail {
     private final String image;
     private final List<String> ingredients;
 
-    Cocktail(CocktailDBResponse.DrinkResource drinkResource){
+    CocktailOut(CocktailDBResponse.DrinkResource drinkResource){
         cocktailId = UUID.nameUUIDFromBytes(drinkResource.getIdDrink().getBytes(StandardCharsets.UTF_8));
         name = drinkResource.getStrDrink();
         glass = drinkResource.getStrGlass();

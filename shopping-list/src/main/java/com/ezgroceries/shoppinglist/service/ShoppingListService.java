@@ -1,7 +1,7 @@
-package com.ezgroceries.shoppinglist.shoppinglists;
+package com.ezgroceries.shoppinglist.service;
 
-import com.ezgroceries.shoppinglist.cocktails.CocktailId;
-import com.ezgroceries.shoppinglist.cocktails.CocktailService;
+import com.ezgroceries.shoppinglist.controller.CocktailId;
+import com.ezgroceries.shoppinglist.controller.ShoppingListOut;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,29 +12,29 @@ import java.util.UUID;
 public class ShoppingListService {
 
     private final CocktailService cocktailService;
-    private final List<ShoppingList> shoppingLists = new ArrayList<>();
+    private final List<ShoppingListOut> shoppingLists = new ArrayList<>();
 
     ShoppingListService(CocktailService cocktailService){
         this.cocktailService = cocktailService;
     }
 
-    public ShoppingList addShoppingList(ShoppingList shoppingList) {
+    public ShoppingListOut addShoppingList(ShoppingListOut shoppingList) {
         shoppingLists.add(shoppingList);
         return shoppingList;
     }
 
-    public ShoppingList getShoppingList(UUID shoppingListId ) {
+    public ShoppingListOut getShoppingList(UUID shoppingListId ) {
         return shoppingLists.stream()
                 .filter(shoppingList -> shoppingListId.equals(shoppingList.getShoppingListId()))
                 .findFirst()
                 .orElse(null);
     }
 
-    public List<ShoppingList> getShoppingLists() {
+    public List<ShoppingListOut> getShoppingLists() {
         return shoppingLists;
     }
 
-    public void addCocktails(ShoppingList shoppingList, List<CocktailId> cocktailIds){
+    public void addCocktails(ShoppingListOut shoppingList, List<CocktailId> cocktailIds){
         for (CocktailId cocktailId : cocktailIds){
             List<String> ingredients = cocktailService.getIngredients(cocktailId.getCocktailId());
             shoppingList.addIngredients(ingredients);

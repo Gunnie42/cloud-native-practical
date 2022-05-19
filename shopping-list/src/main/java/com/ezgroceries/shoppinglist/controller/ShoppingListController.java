@@ -1,6 +1,6 @@
-package com.ezgroceries.shoppinglist.shoppinglists;
+package com.ezgroceries.shoppinglist.controller;
 
-import com.ezgroceries.shoppinglist.cocktails.CocktailId;
+import com.ezgroceries.shoppinglist.service.ShoppingListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class ShoppingListController {
 
     @PostMapping("shopping-lists")
     @ResponseBody
-    public ResponseEntity<ShoppingList> createShoppingList (@RequestBody ShoppingList shoppingList){
+    public ResponseEntity<ShoppingListOut> createShoppingList (@RequestBody ShoppingListOut shoppingList){
         shoppingListService.addShoppingList(shoppingList);
 
         URI location = ServletUriComponentsBuilder
@@ -34,13 +34,13 @@ public class ShoppingListController {
     }
 
     @GetMapping("shopping-lists/{shoppingListId}")
-    public ShoppingList getShoppingList(@PathVariable UUID shoppingListId){
+    public ShoppingListOut getShoppingList(@PathVariable UUID shoppingListId){
         return shoppingListService.getShoppingList(shoppingListId);
     }
 
     @GetMapping("shopping-lists")
     @ResponseStatus(HttpStatus.OK)
-    public List<ShoppingList> getShoppingLists(){
+    public List<ShoppingListOut> getShoppingLists(){
         return shoppingListService.getShoppingLists();
     }
 
@@ -53,7 +53,7 @@ public class ShoppingListController {
                 .buildAndExpand()
                 .toUri();
 
-        ShoppingList shoppingList = shoppingListService.getShoppingList(shoppingListId);
+        ShoppingListOut shoppingList = shoppingListService.getShoppingList(shoppingListId);
         shoppingListService.addCocktails(shoppingList,cocktailIds);
 
         return ResponseEntity

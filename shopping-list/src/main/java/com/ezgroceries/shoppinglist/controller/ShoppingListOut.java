@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.shoppinglists;
+package com.ezgroceries.shoppinglist.controller;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
@@ -8,14 +8,14 @@ import java.util.*;
 
 @Setter
 @Getter
-public class ShoppingList {
+public class ShoppingListOut {
 
     private final UUID shoppingListId;
     private String name;
     private final Set<String> ingredients = new HashSet<>();
 
     @JsonCreator
-    public ShoppingList(String name){
+    public ShoppingListOut(String name){
         shoppingListId = UUID.randomUUID();
         this.name = name;
     }

@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.shoppinglists.client;
 
-import com.ezgroceries.shoppinglist.cocktails.CocktailId;
-import com.ezgroceries.shoppinglist.shoppinglists.ShoppingList;
+import com.ezgroceries.shoppinglist.controller.CocktailId;
+import com.ezgroceries.shoppinglist.controller.ShoppingListOut;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,12 +27,12 @@ public class ShoppingListClientTest {
     void createShoppingList() {
         String url = "/shopping-lists";
 
-        ShoppingList shoppingList = new ShoppingList(BIRTHDAY);
+        ShoppingListOut shoppingList = new ShoppingListOut(BIRTHDAY);
         URI newShoppingListLocation = restTemplate.postForLocation(url, shoppingList);
 
         assertThat(newShoppingListLocation).isNotNull();
 
-        ShoppingList retrievedShoppingList = restTemplate.getForObject(newShoppingListLocation, ShoppingList.class);
+        ShoppingListOut retrievedShoppingList = restTemplate.getForObject(newShoppingListLocation, ShoppingListOut.class);
         assertThat(retrievedShoppingList.getName()).isEqualTo(BIRTHDAY);
 
     }
@@ -40,7 +40,7 @@ public class ShoppingListClientTest {
     @Test
     void addCocktails() {
         String url = "/shopping-lists";
-        ShoppingList shoppingList = new ShoppingList(BIRTHDAY);
+        ShoppingListOut shoppingList = new ShoppingListOut(BIRTHDAY);
         restTemplate.postForLocation(url, shoppingList);
         UUID shoppingListId = shoppingList.getShoppingListId();
 
