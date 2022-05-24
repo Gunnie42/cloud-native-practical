@@ -18,6 +18,10 @@ public class CocktailEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String idDrink;
+    private String name;
+    private String glass;
+    private String instructions;
+    private String image;
 
     @Convert(converter = StringSetConverter.class)
     private Set<String> ingredients;

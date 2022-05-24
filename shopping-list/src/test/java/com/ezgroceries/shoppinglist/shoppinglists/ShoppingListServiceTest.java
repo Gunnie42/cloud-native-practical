@@ -1,6 +1,6 @@
 package com.ezgroceries.shoppinglist.shoppinglists;
 
-import com.ezgroceries.shoppinglist.controller.ShoppingListOut;
+import com.ezgroceries.shoppinglist.controller.ShoppingListResource;
 import com.ezgroceries.shoppinglist.service.ShoppingListService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,10 @@ class ShoppingListServiceTest {
 
     @Test
     void getShoppingListShouldWork(){
-        ShoppingListOut shoppingList = new ShoppingListOut("Test");
+        ShoppingListResource shoppingList = new ShoppingListResource("Test");
         UUID shoppingListId = shoppingList.getShoppingListId();
         shoppingListService.addShoppingList(shoppingList);
-        ShoppingListOut test = shoppingListService.getShoppingList(shoppingListId);
+        ShoppingListResource test = shoppingListService.getShoppingList(shoppingListId);
         assertThat(test).isNotNull();
         assertThat(test.getName()).isEqualTo("Test");
 

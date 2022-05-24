@@ -22,7 +22,7 @@ import java.util.Arrays;
 import static org.springframework.web.servlet.function.RequestPredicates.param;
 
 @WebMvcTest(CocktailController.class)
-public class CocktailOutControllerBootTests {
+public class CocktailResourceControllerBootTests {
 
     @Autowired
     private MockMvc mockMvc;

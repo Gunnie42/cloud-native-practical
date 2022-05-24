@@ -14,6 +14,6 @@ import java.util.UUID;
 public class ShoppingListEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID key;
+    private UUID id;
     private String name;
 }

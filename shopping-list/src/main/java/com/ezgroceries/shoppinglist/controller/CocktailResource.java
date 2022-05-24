@@ -7,12 +7,13 @@ import lombok.Setter;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class CocktailOut {
+public class CocktailResource {
 
     private final UUID cocktailId;
     private final String name;
@@ -21,7 +22,7 @@ public class CocktailOut {
     private final String image;
     private final List<String> ingredients;
 
-    CocktailOut(CocktailDBResponse.DrinkResource drinkResource){
+    public CocktailResource(CocktailDBResponse.DrinkResource drinkResource){
         cocktailId = UUID.nameUUIDFromBytes(drinkResource.getIdDrink().getBytes(StandardCharsets.UTF_8));
         name = drinkResource.getStrDrink();
         glass = drinkResource.getStrGlass();

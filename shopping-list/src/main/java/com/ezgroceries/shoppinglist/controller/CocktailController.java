@@ -1,6 +1,8 @@
 package com.ezgroceries.shoppinglist.controller;
 
 import com.ezgroceries.shoppinglist.service.CocktailDBClient;
+import com.ezgroceries.shoppinglist.service.CocktailDBResponse;
+import com.ezgroceries.shoppinglist.service.CocktailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,17 +19,12 @@ import java.util.stream.Collectors;
 public class CocktailController {
 
     private final CocktailDBClient cocktailDBClient;
+    private final CocktailService cocktailService;
 
     @GetMapping
-    public ResponseEntity<List<CocktailOut>> get(@RequestParam String search) {
-        List<CocktailOut> res = cocktailDBClient
-                .searchCocktails(search)
-                .getDrinks()
-                .stream()
-                .map(CocktailOut::new)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(res);
+    public ResponseEntity<List<CocktailResource>> get(@RequestParam String search) {
+        List<CocktailDBResponse.DrinkResource> drinks = cocktailDBClient.searchCocktails(search).getDrinks();
+        return ResponseEntity.ok(cocktailService.mergeCocktails(drinks));
     }
 
 }

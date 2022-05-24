@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.shoppinglists.web;
 
 import com.ezgroceries.shoppinglist.controller.CocktailId;
-import com.ezgroceries.shoppinglist.controller.ShoppingListOut;
+import com.ezgroceries.shoppinglist.controller.ShoppingListResource;
 import com.ezgroceries.shoppinglist.controller.ShoppingListController;
 import com.ezgroceries.shoppinglist.service.ShoppingListService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +35,7 @@ public class ShoppingListControllerBootTest {
     @Test
     public void getShoppingList() throws Exception {
         given(shoppingListService.getShoppingList(any(UUID.class)))
-                .willReturn(new ShoppingListOut("Test"));
+                .willReturn(new ShoppingListResource("Test"));
 
         mockMvc.perform(get("/shopping-lists/" + UUID.randomUUID()))
                 .andDo(print())
@@ -48,9 +48,9 @@ public class ShoppingListControllerBootTest {
 
     @Test
     void createShoppingList() throws Exception {
-        ShoppingListOut testShoppingList = new ShoppingListOut("Test");
+        ShoppingListResource testShoppingList = new ShoppingListResource("Test");
 
-        given(shoppingListService.addShoppingList(any(ShoppingListOut.class)))
+        given(shoppingListService.addShoppingList(any(ShoppingListResource.class)))
                 .willReturn(testShoppingList);
 
         mockMvc.perform(post("/shopping-lists")
@@ -58,13 +58,13 @@ public class ShoppingListControllerBootTest {
                 .content(asJsonString(testShoppingList)))
                 .andExpect(status().isCreated());
 
-        verify(shoppingListService).addShoppingList((any(ShoppingListOut.class)));
+        verify(shoppingListService).addShoppingList((any(ShoppingListResource.class)));
 
     }
 
     @Test
     void addCocktails() throws Exception {
-        ShoppingListOut testShoppingList = new ShoppingListOut("Test");
+        ShoppingListResource testShoppingList = new ShoppingListResource("Test");
 
         given(shoppingListService.getShoppingList(any(UUID.class)))
                 .willReturn(testShoppingList);
@@ -87,9 +87,9 @@ public class ShoppingListControllerBootTest {
     @Test
     void getAllShoppingLists() throws Exception {
 
-        List<ShoppingListOut> allLists = Arrays.asList(
-                new ShoppingListOut("Stephanie's Birthday"),
-                new ShoppingListOut("My Birthday")
+        List<ShoppingListResource> allLists = Arrays.asList(
+                new ShoppingListResource("Stephanie's Birthday"),
+                new ShoppingListResource("My Birthday")
         );
 
         given(shoppingListService.getShoppingLists()).willReturn(allLists);

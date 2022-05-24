@@ -1,6 +1,6 @@
 package com.ezgroceries.shoppinglist.shoppinglists.client;
 
-import com.ezgroceries.shoppinglist.controller.ShoppingListOut;
+import com.ezgroceries.shoppinglist.controller.ShoppingListResource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,13 +24,13 @@ public class ShoppingListWebTestClientTests {
     void createShoppingList_WebTestClient() {
         String url = "shopping-lists";
 
-        ShoppingListOut shoppingList = new ShoppingListOut("Test");
+        ShoppingListResource shoppingList = new ShoppingListResource("Test");
 
         webTestClient.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .body(Mono.just(shoppingList), ShoppingListOut.class)
+                .body(Mono.just(shoppingList), ShoppingListResource.class)
                 .exchange()
                 .expectStatus().isCreated()
                 .expectHeader().value("Location", location -> {
@@ -40,9 +40,9 @@ public class ShoppingListWebTestClientTests {
                                 .uri(newShoppingLocation)
                                 .exchange()
                                 .expectStatus().isOk()
-                                .expectBody(ShoppingListOut.class)
+                                .expectBody(ShoppingListResource.class)
                                 .consumeWith(response -> {
-                                    ShoppingListOut retrievedShoppingList = response.getResponseBody();
+                                    ShoppingListResource retrievedShoppingList = response.getResponseBody();
                                     assertThat(retrievedShoppingList).isNotNull();
                                     assertThat(retrievedShoppingList.getName()).isEqualTo("Test");
                                 });
@@ -50,11 +50,11 @@ public class ShoppingListWebTestClientTests {
                         e.printStackTrace();
                     }
                 })
-                .expectBody(ShoppingListOut.class)
+                .expectBody(ShoppingListResource.class)
                 .consumeWith(response -> {
-                    ShoppingListOut retreivedShoppingListOut = response.getResponseBody();
-                    assertThat(retreivedShoppingListOut).isNotNull();
-                    assertThat(retreivedShoppingListOut.getName()).isEqualTo("Test");
+                    ShoppingListResource retreivedShoppingListResource = response.getResponseBody();
+                    assertThat(retreivedShoppingListResource).isNotNull();
+                    assertThat(retreivedShoppingListResource.getName()).isEqualTo("Test");
                 });
 
 

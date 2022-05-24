@@ -1,6 +1,6 @@
 package com.ezgroceries.shoppinglist.shoppinglists.web;
 
-import com.ezgroceries.shoppinglist.controller.ShoppingListOut;
+import com.ezgroceries.shoppinglist.controller.ShoppingListResource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,11 +22,11 @@ public class ShoppingListControllerTests {
     void createShoppingList() {
         String url = "/shopping-lists";
 
-        ShoppingListOut shoppingList = new ShoppingListOut(BIRTHDAY);
+        ShoppingListResource shoppingList = new ShoppingListResource(BIRTHDAY);
 
         URI newShoppingListLocation = restTemplate.postForLocation(url, shoppingList);
 
-        ShoppingListOut retrievedShoppingList = restTemplate.getForObject(newShoppingListLocation, ShoppingListOut.class);
+        ShoppingListResource retrievedShoppingList = restTemplate.getForObject(newShoppingListLocation, ShoppingListResource.class);
 
         assertThat(retrievedShoppingList).isNotNull();
 

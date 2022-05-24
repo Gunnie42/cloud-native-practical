@@ -19,7 +19,7 @@ public class ShoppingListController {
 
     @PostMapping("shopping-lists")
     @ResponseBody
-    public ResponseEntity<ShoppingListOut> createShoppingList (@RequestBody ShoppingListOut shoppingList){
+    public ResponseEntity<ShoppingListResource> createShoppingList (@RequestBody ShoppingListResource shoppingList){
         shoppingListService.addShoppingList(shoppingList);
 
         URI location = ServletUriComponentsBuilder
@@ -34,13 +34,13 @@ public class ShoppingListController {
     }
 
     @GetMapping("shopping-lists/{shoppingListId}")
-    public ShoppingListOut getShoppingList(@PathVariable UUID shoppingListId){
+    public ShoppingListResource getShoppingList(@PathVariable UUID shoppingListId){
         return shoppingListService.getShoppingList(shoppingListId);
     }
 
     @GetMapping("shopping-lists")
     @ResponseStatus(HttpStatus.OK)
-    public List<ShoppingListOut> getShoppingLists(){
+    public List<ShoppingListResource> getShoppingLists(){
         return shoppingListService.getShoppingLists();
     }
 
@@ -53,7 +53,7 @@ public class ShoppingListController {
                 .buildAndExpand()
                 .toUri();
 
-        ShoppingListOut shoppingList = shoppingListService.getShoppingList(shoppingListId);
+        ShoppingListResource shoppingList = shoppingListService.getShoppingList(shoppingListId);
         shoppingListService.addCocktails(shoppingList,cocktailIds);
 
         return ResponseEntity
