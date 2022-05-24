@@ -15,16 +15,17 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/cocktails", produces = "application/json")
-@RequiredArgsConstructor
 public class CocktailController {
 
-    private final CocktailDBClient cocktailDBClient;
     private final CocktailService cocktailService;
+
+    public CocktailController ( CocktailService cocktailService) {
+        this.cocktailService = cocktailService;
+    }
 
     @GetMapping
     public ResponseEntity<List<CocktailResource>> get(@RequestParam String search) {
-        List<CocktailDBResponse.DrinkResource> drinks = cocktailDBClient.searchCocktails(search).getDrinks();
-        return ResponseEntity.ok(cocktailService.mergeCocktails(drinks));
+        return ResponseEntity.ok(cocktailService.searchCocktails(search));
     }
 
 }

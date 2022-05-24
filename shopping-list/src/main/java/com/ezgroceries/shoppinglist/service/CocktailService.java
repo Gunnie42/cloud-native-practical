@@ -3,6 +3,7 @@ package com.ezgroceries.shoppinglist.service;
 import com.ezgroceries.shoppinglist.controller.CocktailResource;
 import com.ezgroceries.shoppinglist.persistence.CocktailEntity;
 import com.ezgroceries.shoppinglist.persistence.CocktailRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,6 +14,7 @@ import java.util.stream.Stream;
 public class CocktailService {
 
     private final CocktailRepository cocktailRepository;
+    private final CocktailDBClient cocktailDBClient;
 
     private final List<CocktailResource> cocktails = Arrays.asList(
             new CocktailResource(
@@ -28,8 +30,11 @@ public class CocktailService {
             "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
             Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
 
-    public CocktailService(CocktailRepository cocktailRepository) {
+    public CocktailService(
+            CocktailRepository cocktailRepository,
+            CocktailDBClient cocktailDBClient) {
         this.cocktailRepository = cocktailRepository;
+        this.cocktailDBClient = cocktailDBClient;
     }
 
     public CocktailResource getCocktail(UUID cocktailId) {
@@ -78,11 +83,8 @@ public class CocktailService {
                 drinkResource.getStrInstructions(), drinkResource.getStrImageSource(), drinkResource.getIngredients())).collect(Collectors.toList());
     }
 
-
-
-
-
-
-
-
+    public List<CocktailResource> searchCocktails(String search) {
+        List<CocktailDBResponse.DrinkResource> drinks = cocktailDBClient.searchCocktails(search).getDrinks();
+        return mergeCocktails(drinks);
+    }
 }
