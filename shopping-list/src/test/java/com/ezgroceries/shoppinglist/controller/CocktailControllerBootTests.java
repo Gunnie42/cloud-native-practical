@@ -1,6 +1,6 @@
-package com.ezgroceries.shoppinglist.cocktails;
+package com.ezgroceries.shoppinglist.controller;
 
-import com.ezgroceries.shoppinglist.controller.CocktailController;
+import com.ezgroceries.shoppinglist.ShoppingListApplication;
 import com.ezgroceries.shoppinglist.service.CocktailDBClient;
 import com.ezgroceries.shoppinglist.service.CocktailDBResponse;
 import org.junit.jupiter.api.Test;
@@ -21,8 +21,8 @@ import java.util.Arrays;
 
 import static org.springframework.web.servlet.function.RequestPredicates.param;
 
-@WebMvcTest(CocktailController.class)
-public class CocktailResourceControllerBootTests {
+@WebMvcTest(ShoppingListApplication.class)
+public class CocktailControllerBootTests {
 
     @Autowired
     private MockMvc mockMvc;

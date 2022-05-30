@@ -65,7 +65,7 @@
         </dependency>
 
         <!-- Data persistence -->
-        <!-- We will use postman as our persistent db -->
+        <!-- We will use postgres as our persistent db -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>

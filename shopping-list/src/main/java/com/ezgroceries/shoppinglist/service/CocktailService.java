@@ -3,6 +3,7 @@ package com.ezgroceries.shoppinglist.service;
 import com.ezgroceries.shoppinglist.controller.CocktailResource;
 import com.ezgroceries.shoppinglist.persistence.CocktailEntity;
 import com.ezgroceries.shoppinglist.persistence.CocktailRepository;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+@ComponentScan("com.ezgroceries.shoppinglist")
 public class CocktailService {
 
     private final CocktailRepository cocktailRepository;
